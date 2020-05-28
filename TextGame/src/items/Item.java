@@ -15,15 +15,17 @@ public abstract class Item {
 		setPickUp(null);
 		setMove(null);
 		initialize();
+		if (type==null) printError("Item Constructor-Forgot to set type.");
 	}
 	
 	/*
-	 * set name, description, and other fields if need be
+	 * set type, name, description, and other fields if need be
 	 */
 	abstract void initialize();
 	
 	//what happens when the item is used on another item
 	public abstract Item[] mixItems(Item input, MainGame g);
+	
 	/*what happens when the player uses the item on themselves
 	 * returns true if the item needs to be deleted, false if it still exists
 	*/
@@ -73,6 +75,6 @@ public abstract class Item {
 	 * when calling this method pass the name of the method that is calling it
 	 */
 	public void printError(String method) {
-		System.out.println("Error-Item-"+method);
+		System.out.println("Error-"+type.toString()+"-"+method);
 	}
 }

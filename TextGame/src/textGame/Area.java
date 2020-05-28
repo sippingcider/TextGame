@@ -6,6 +6,8 @@ import enums.DirectionType;
 import enums.ItemType;
 import enums.PersonType;
 import items.*;
+import people.Dugal;
+import people.Person;
 
 public class Area {
 	private ArrayList<Item> items;
@@ -44,7 +46,7 @@ public class Area {
 		case DARK_THRONE_ROOM:
 			name = "Throne Room";
 			setDes("A vast room of shadows, black as night.  Only your true sight allows you to see what is here.");
-			addPerson(new Person(PersonType.DUGAL));
+			addPerson(new Dugal());
 			setLighting(250);
 			setDLink(DirectionType.WEST, AreaType.DARK_TORTURE_CHAMBER);
 			break;

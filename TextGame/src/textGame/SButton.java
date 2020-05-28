@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import enums.DirectionType;
 import enums.SButtonType;
 import items.Item;
+import people.Person;
 
 /*
  * SButton stands for special button.  I couldn't name it Button because I guess Java claimed that name already.

@@ -15,6 +15,7 @@ import enums.DirectionType;
 import enums.ItemType;
 import enums.SButtonType;
 import items.Item;
+import people.Person;
 
 /*
  * main method that ties everything together
