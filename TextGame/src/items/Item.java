@@ -1,11 +1,12 @@
 package items;
 import enums.ItemType;
+import textGame.Entity;
 import textGame.MainGame;
 
-public abstract class Item {
+public abstract class Item extends Entity {
 	private ItemType type;
 	private Item pickUp;
-	private String name, des, move;
+	private String move;
 	
 	/*initializes the item depending on what type of item it is
 	 * if the item is too big to put into an inventory or can't be moved for other reasons, set the move string to the message that should show when the player tries to pick up the item
@@ -30,22 +31,6 @@ public abstract class Item {
 	 * returns true if the item needs to be deleted, false if it still exists
 	*/
 	public abstract boolean useItem (MainGame g) ;
-
-	public void setName(String s) {
-		this.name = s;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setDes(String s) {
-		this.des = s;
-	}
-	
-	public String getDes() {
-		return des;
-	}
 	
 	public void setType(ItemType t) {
 		this.type = t;

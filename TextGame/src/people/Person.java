@@ -2,12 +2,13 @@ package people;
 import enums.PersonType;
 import enums.StatusType;
 import items.Item;
+import textGame.Entity;
 import textGame.MainGame;
 
-public abstract class Person {
+public abstract class Person extends Entity{
 	private PersonType type;
 	private StatusType status;
-	private String des, name, dialogue, idleDes;
+	private String dialogue, idleDes;
 	private boolean converted;
 	
 	public Person() {
@@ -31,14 +32,6 @@ public abstract class Person {
 	 * return an array of items to be added to the game.
 	 */
 	public abstract Item[] recieveItem(Item item, MainGame g);
-
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String s) {
-		name = s;
-	}
 	
 	public PersonType getType() {
 		return type;
@@ -74,16 +67,6 @@ public abstract class Person {
 	public void setDialogue(String dialogue) {
 		if (dialogue==null) printError("setDialogue");
 		this.dialogue = dialogue;
-	}
-
-	public String getDes() {
-		if (des==null) printError("getDes");
-		return des;
-	}
-
-	public void setDes(String des) {
-		if (des==null) printError("setDes");
-		this.des = des;
 	}
 	
 	public StatusType getStatus() {
