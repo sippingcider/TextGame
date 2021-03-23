@@ -86,12 +86,12 @@ public class MainGame extends Canvas implements Runnable
         }
         logb = new SButton(SButtonType.LOG, width(1), height(1),"Event Log", red, standardTextSize,0);
         inventoryb = new SButton(SButtonType.INVENTORY, width(3), height(93),"Inventory (0/10)", red, standardTextSize,0);
-        playerb = new SButton(SButtonType.PLAYER, width(45), height(87),"Player", red, standardTextSize,0);
+        playerb = new SButton(SButtonType.PLAYER, width(62), height(87),"Player", red, standardTextSize,0);
         areaHeaderb = new SButton(SButtonType.AREA_HEADER, width(35), height(3),"", green, width(4),0);
         adesb = new SButton(SButtonType.DESCRIPTION, width(35), height(15), "", black, standardTextSize,0);
         dirbs = new SButton[DirectionType.values().length];
         for (int i = 0; i < dirbs.length; i++) {
-        	dirbs[i] = new SButton(SButtonType.LOCATION_LINK, width(45), height(87)-moveSpacing,"", green, standardTextSize, i);
+        	dirbs[i] = new SButton(SButtonType.LOCATION_LINK, width(62), height(87)-moveSpacing,"", green, standardTextSize, i);
         }
         dirbs[DirectionType.EAST.ordinal()].setLocation(width(60), height(87));
         dirbs[DirectionType.SOUTH.ordinal()].setLocation(-1, height(87)+moveSpacing);
@@ -209,7 +209,7 @@ public class MainGame extends Canvas implements Runnable
      * TODO: split up message more accurately based on screen length
      */
     public void addLog(String s) {
-    	logOffset = eventLog.size()+1;
+    	int oldSize = eventLog.size();
     	logs++;
     	SButton temp = new SButton(SButtonType.DESCRIPTION, 0, 0,"("+logs+") "+s, black, standardTextSize,0);
     	String[] words = temp.getTextArray();
@@ -227,6 +227,8 @@ public class MainGame extends Canvas implements Runnable
 			}
 		}
 		eventLog.add(add);
+    	logOffset = eventLog.size();
+    	if (logOffset-oldSize>logbs.length) logOffset = oldSize+logbs.length;
 		if (!logOpen) unreadMessages++;
     	refreshLog();
     }
@@ -467,7 +469,7 @@ public class MainGame extends Canvas implements Runnable
         	}
         }
         g.setColor(veil.getSelected());
-        g.fillRect(0, 0, width, height);
+        g.fillRect(width(34), 0, width, height);
         
         g.dispose();
         bs.show();

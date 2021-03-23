@@ -12,7 +12,7 @@ public class CapturedPriest extends Person{
 		setType(PersonType.CAPTURED_PRIEST);
 		setName("Captured Priest");
 		setIdleDes(" is cowering.");
-		setDes("NEEDS DESCRIPTION-wears standard cloths for priest of Stolhel.  Holding hands defensively in front of face because he can't see in this dark room.");
+		setDes("A bald, middle aged man, wearing white robes.  A yellow emblem of a fist grasping a sun is stitched to the front.");
 		setDialogue("Who...who's there?");
 	}
 

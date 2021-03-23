@@ -33,13 +33,13 @@ public class Area {
 		switch(type) {
 		case INFINITE_DARKNESS:
 			name = "Infinite Darkness";
-			setDes("Welcome, child.  I know you long for the emptiness of sleep, but your service is required once again.  Take a moment to awaken your true sight, and when you are ready, bring yourself to the throne room.");
+			setDes("Welcome, child.  I know you long for the emptiness of sleep, but your service is required once again.  Take a moment to awaken your true sight, and when you are ready, bring yourself to the throne room. (Click and drag your name to a location to go there)");
 			setLighting(0);
 			setDLink(DirectionType.NORTH, "through the darkness", AreaType.OUTSIDE_DARK_THRONE_ROOM);
 			break;
 		case OUTSIDE_DARK_THRONE_ROOM:
 			name = "Throne Room Entrance";
-			setDes("Good job, your movement is as good as it always was.  In order to prepare you for your next mission, I will take physical form inside the Throne Room.  Initiate conversation with me, and I will continue your breifing.");
+			setDes("Good job, your movement is as good as it always was.  In order to prepare you for your next mission, I will take physical form inside the Throne Room.  Initiate conversation with me, and I will continue your breifing. (Click and drag your name onto a character to talk to them)");
 			setDLink(DirectionType.NORTH, "in", AreaType.DARK_THRONE_ROOM);
 			setLighting(250);
 			break;

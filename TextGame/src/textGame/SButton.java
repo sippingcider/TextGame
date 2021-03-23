@@ -119,10 +119,8 @@ public class SButton {
 			for (SButton s:g.inventorybs) if(g.inventory[s.pointer]!=null) s.setVisible(g.invOpen);
 			break;
 		case PERSON:
-			String con = "Non-believer.";
 			Person p = g.location.getPerson(pointer);
-			if(p.getConverted()) con = "Believer.";
-			g.addLog(p.getName()+": "+p.getDes()+con);
+			g.addLog(p.getName()+": "+p.getDes());
 			break;
 		case AREA_ITEM:
 			Item item = g.location.getItem(pointer);
