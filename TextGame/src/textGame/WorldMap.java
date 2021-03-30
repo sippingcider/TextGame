@@ -1,5 +1,7 @@
 package textGame;
 import enums.AreaType;
+import enums.PersonType;
+import people.Person;
 
 /*
  * an array of all the areas in the game
@@ -17,5 +19,14 @@ public class WorldMap {
 	
 	public Area getArea(AreaType area) {
 		return map[area.ordinal()];
+	}
+	
+	public Person getPerson(PersonType type) {
+		for (Area a:map) {
+			for (int i = 0; i < a.getPeopleSize(); i++) {
+				if (a.getPerson(i).getType()==type) return a.getPerson(i);
+			}
+		}
+		return null;
 	}
 }

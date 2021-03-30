@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import enums.AreaType;
 import enums.DirectionType;
 import enums.ItemType;
+import enums.PersonType;
 import enums.SButtonType;
 import items.Item;
 import people.Person;
@@ -38,6 +39,7 @@ public class MainGame extends Canvas implements Runnable
     SButton[] inventorybs,logbs,dirbs;
     ArrayList<SButton> buttons;
     ArrayList<String> eventLog;
+    ArrayList<Event> events;
     
     public MainGame() {
         width = 1280;
@@ -78,14 +80,14 @@ public class MainGame extends Canvas implements Runnable
         	logbs[i].setVisible(false);
         }
         invOpen = true;
-        inventory = new Item[10];
+        inventory = new Item[9];
         inventorybs = new SButton[inventory.length];
         for (int i = 0; i < inventory.length;i++) {
         	inventorybs[i] = new SButton(SButtonType.INVENTORY_ITEM, width(3), height(93-(i+1)*5),"", blue, standardTextSize,i);
         	inventorybs[i].setVisible(false);
         }
         logb = new SButton(SButtonType.LOG, width(1), height(1),"Event Log", red, standardTextSize,0);
-        inventoryb = new SButton(SButtonType.INVENTORY, width(3), height(93),"Inventory (0/10)", red, standardTextSize,0);
+        inventoryb = new SButton(SButtonType.INVENTORY, width(3), height(93),"Inventory (0/9)", red, standardTextSize,0);
         playerb = new SButton(SButtonType.PLAYER, width(62), height(87),"Player", red, standardTextSize,0);
         areaHeaderb = new SButton(SButtonType.AREA_HEADER, width(35), height(3),"", green, width(4),0);
         adesb = new SButton(SButtonType.DESCRIPTION, width(35), height(15), "", black, standardTextSize,0);
@@ -102,6 +104,11 @@ public class MainGame extends Canvas implements Runnable
         logDown.setVisible(false);
          
         map = new WorldMap();
+        events = new ArrayList<Event>();
+        addEvent(AreaType.OUTSIDE_DARK_THRONE_ROOM, "Dugal: \"Your movement is as good as it always was.  Come see me in the Throne Room.\"");
+        addEvent(AreaType.DARK_THRONE_ROOM, "Dugal: \"I must have a word with you.\"  (To talk to a character, click and drag your name to that character.)");
+        addEvent(AreaType.DARK_TORTURE_CHAMBER, "Dugal: \"You do remember how to pick things up, right?\" (To pick up an item, click and drag it onto your inventory)");
+        addLog("Dugal: \"Welcome, child.  I know you long for the emptiness of sleep, but your service is required once again.  Take a moment to awaken your true sight, and when you are ready, bring yourself to the throne room.\"(Click and drag your character to a location to go there)");
         /*
          * render once because bounds calculations for buttons are done in render method
          */
@@ -122,6 +129,16 @@ public class MainGame extends Canvas implements Runnable
             	setLighting();
         	}
         }
+    }
+    
+    /*
+     * adds event to event list to watch for
+     */
+    public void addEvent(AreaType trigger, String message) {
+    	events.add(new Event(trigger, message));
+    }
+    public void addEvent(PersonType trigger, String message) {
+    	events.add(new Event(trigger, message));
     }
     
     /*
@@ -256,7 +273,7 @@ public class MainGame extends Canvas implements Runnable
     
     public int getInvSize() {
     	int invSize = 0;
-		while (inventory[invSize]!=null) invSize++;
+		while (invSize<inventory.length && inventory[invSize]!=null) invSize++;
 		return invSize;
     }
     
@@ -469,7 +486,7 @@ public class MainGame extends Canvas implements Runnable
         	}
         }
         g.setColor(veil.getSelected());
-        g.fillRect(width(34), 0, width, height);
+        g.fillRect(0, 0, width, height);
         
         g.dispose();
         bs.show();

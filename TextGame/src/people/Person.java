@@ -58,6 +58,8 @@ public abstract class Person extends Entity{
 		if (idleDes==null) printError("setIdleDes");
 		this.idleDes = idleDes;
 	}
+	
+	public abstract String talk(MainGame g);
 
 	public String getDialogue() {
 		if (dialogue==null) printError("getDialogue");

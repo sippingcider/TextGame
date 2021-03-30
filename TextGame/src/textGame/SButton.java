@@ -162,12 +162,28 @@ public class SButton {
 			switch (collision.type) {
 			case PERSON:
 				Person p = g.location.getPerson(collision.getPointer());
-				g.addLog(p.getName()+": \""+p.getDialogue()+"\"");
+				g.addLog(p.getName()+": \""+p.talk(g)+"\"");
+				for (int i = 0; i < g.events.size(); i++) {
+					Event e = g.events.get(i);
+					if (e.getpTrigger()==p.getType()) {
+						g.addLog(e.getMessage());
+						g.events.remove(i);
+						i--;
+					}
+				}
 				break;
 			case LOCATION_LINK:
 				DirectionLink dl = g.location.getDLink(DirectionType.values()[collision.getPointer()]);
 				Area a = g.map.getArea(dl.getLink());
 				g.addLog("Went "+dl.getMoveDes()+ " to "+a.getName());
+				for (int i = 0; i < g.events.size(); i++) {
+					Event e = g.events.get(i);
+					if (e.getaTrigger()==a.getType()) {
+						g.addLog(e.getMessage());
+						g.events.remove(i);
+						i--;
+					}
+				}
 				g.location = a;
 				g.loadArea(g.location);
 				break;
@@ -232,6 +248,7 @@ public class SButton {
 		case INVENTORY_ITEM:
 			switch(collision.type) {
 			case AREA_HEADER:
+				g.addLog("Dropped "+g.inventory[pointer].getName()+" at "+g.location.getName());
 				g.location.addItem(g.inventory[pointer]);
 				g.invRemove(pointer);
 				g.loadArea(g.location);
